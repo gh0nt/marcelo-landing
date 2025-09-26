@@ -1,0 +1,94 @@
+{
+  "navigation": {
+    "home": "Inicio",
+    "projects": "Proyectos",
+    "about": "Sobre mí",
+    "services": "Servicios",
+    "contact": "Contacto",
+    "contactMe": "Contáctame"
+  },
+  "hero": {
+    "greeting": "Hola, soy",
+    "name": "Ángel",
+    "title": "Entrenador Personal & Coach de Fitness",
+    "subtitle": "Transformo vidas a través del fitness personalizado y la nutrición integral",
+    "description": "Más de 8 años ayudando a personas a alcanzar sus objetivos de salud y bienestar con planes personalizados, seguimiento continuo y motivación constante.",
+    "viewProjects": "Ver Proyectos",
+    "aboutMe": "Sobre mí",
+    "connectWithMe": "CONÉCTATE CONMIGO",
+    "hello": "Hola, soy Ángel 👋",
+    "experience": "8 Años de Experiencia ⭐"
+  },
+  "services": {
+    "title": "Mis",
+    "titleHighlight": "Servicios",
+    "subtitle": "Transformo ideas en experiencias digitales excepcionales. Desde el concepto inicial hasta la implementación final.",
+    "uiux": {
+      "title": "Diseño UI/UX",
+      "description": "Interfaces intuitivas y experiencias de usuario excepcionales que convierten visitantes en clientes.",
+      "features": [
+        "Research y análisis de usuarios",
+        "Wireframes y prototipos interactivos",
+        "Diseño visual y sistema de componentes",
+        "Testing de usabilidad"
+      ],
+      "price": "Desde €2,500"
+    },
+    "frontend": {
+      "title": "Desarrollo Frontend",
+      "description": "Implementación técnica de diseños con código limpio, optimizado y escalable.",
+      "features": [
+        "React/Vue.js/Angular development",
+        "Responsive design garantizado",
+        "Optimización de rendimiento",
+        "Integración con APIs y servicios"
+      ],
+      "price": "Desde €3,500",
+      "popular": "Más Popular"
+    },
+    "consulting": {
+      "title": "Consultoría UX",
+      "description": "Auditoría completa de tu producto digital con recomendaciones estratégicas para mejorar la experiencia.",
+      "features": [
+        "Auditoría UX completa",
+        "Análisis de métricas y conversión",
+        "Roadmap de mejoras prioritarias",
+        "Sesiones de training para tu equipo"
+      ],
+      "price": "Desde €1,200"
+    },
+    "startProject": "Comenzar proyecto",
+    "customTitle": "¿Necesitas algo personalizado?",
+    "customDescription": "Cada proyecto es único. Si tienes necesidades específicas o quieres combinar varios servicios, conversemos para crear una propuesta a medida.",
+    "customButton": "Solicitar cotización personalizada"
+  },
+  "contact": {
+    "title": "¿Listo para crear algo",
+    "titleHighlight": "increíble",
+    "subtitle": "Conversemos sobre tu próximo proyecto. Estoy aquí para ayudarte a llevar tus ideas al siguiente nivel.",
+    "form": {
+      "name": "Nombre completo",
+      "email": "Email",
+      "subject": "Asunto",
+      "message": "Mensaje",
+      "namePlaceholder": "Tu nombre",
+      "emailPlaceholder": "tu@email.com",
+      "subjectPlaceholder": "¿En qué puedo ayudarte?",
+      "messagePlaceholder": "Cuéntame sobre tu proyecto...",
+      "submit": "Enviar mensaje",
+      "sending": "Enviando..."
+    },
+    "info": {
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "location": "Ubicación",
+      "emailValue": "hola@angel.com",
+      "whatsappValue": "+34 600 000 000",
+      "locationValue": "Madrid, España"
+    },
+    "success": "¡Mensaje enviado! Gracias por contactarme. Te responderé pronto."
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados."
+  }
+}

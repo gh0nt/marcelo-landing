@@ -1,0 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0d001a;
+  --foreground: #f4f4f4;
+  --primary-orange: #eeba2b;
+  --primary-orange-hover: #e6d000;
+  --background-secondary: #1a0d2e;
+  --foreground-secondary: #b8b8b8;
+  --foreground-muted: #888888;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.03);
+}
+
+:root {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-poppins);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-poppins), 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+/* Efectos de cristal como en la imagen */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.glass-nav {
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+  border-radius: 12px;
+}
+
+.glass-button {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Botón naranja como en la imagen */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-orange), #ff9454);
+  color: #000;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  box-shadow: 0 4px 14px rgba(255, 123, 44, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--primary-orange-hover), #e5691a);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 123, 44, 0.4);
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary:disabled:hover {
+  transform: none;
+  box-shadow: 0 4px 14px rgba(255, 123, 44, 0.25);
+}
+
+/* Texto con gradiente naranja */
+.gradient-text {
+  background: linear-gradient(45deg, var(--primary-orange), #ffab70);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Animaciones */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.8s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.6s ease-out;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 3s ease-in-out infinite 1.5s;
+}
+
+.animate-float-slow {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Estilos personalizados para notistack */
+.SnackbarItem-message {
+  color: var(--foreground) !important;
+  font-family: inherit !important;
+  font-weight: 500 !important;
+}
+
+.SnackbarItem-root {
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  backdrop-filter: blur(20px) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+}
+
+.SnackbarItem-variantSuccess {
+  background: rgba(34, 197, 94, 0.1) !important;
+  border-color: rgba(34, 197, 94, 0.3) !important;
+}
+
+.SnackbarItem-variantError {
+  background: rgba(239, 68, 68, 0.1) !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+.SnackbarItem-variantWarning {
+  background: rgba(245, 158, 11, 0.1) !important;
+  border-color: rgba(245, 158, 11, 0.3) !important;
+}
+
+.SnackbarItem-variantInfo {
+  background: var(--glass-bg) !important;
+  border-color: var(--glass-border) !important;
+}
+
+/* Fix para Select dropdown que bloquea el scroll */
+[data-radix-select-content] {
+  z-index: 100 !important;
+  max-height: 256px !important;
+  overflow-y: auto !important;
+}
+
+[data-radix-popper-content-wrapper] {
+  z-index: 100 !important;
+}
+
+/* Asegurar que el overlay del Select no bloquee el scroll */
+[data-radix-select-viewport] {
+  max-height: 200px !important;
+  overflow-y: auto !important;
+}
+
+/* Fix para el portal del Select */
+.radix-select-content {
+  z-index: 9999 !important;
+  position: fixed !important;
+}

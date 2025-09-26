@@ -1,0 +1,94 @@
+{
+  "navigation": {
+    "home": "Home",
+    "projects": "Projects",
+    "about": "About",
+    "services": "Services",
+    "contact": "Contact",
+    "contactMe": "Contact Me"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Angel",
+    "title": "Personal Trainer & Fitness Coach",
+    "subtitle": "Transforming lives through personalized fitness and comprehensive nutrition",
+    "description": "Over 8 years helping people achieve their health and wellness goals with personalized plans, continuous monitoring and constant motivation.",
+    "viewProjects": "View Projects",
+    "aboutMe": "About Me",
+    "connectWithMe": "CONNECT WITH ME",
+    "hello": "Hi, I'm Angel 👋",
+    "experience": "8 Years of Experience ⭐"
+  },
+  "services": {
+    "title": "My",
+    "titleHighlight": "Services",
+    "subtitle": "I transform ideas into exceptional digital experiences. From initial concept to final implementation.",
+    "uiux": {
+      "title": "UI/UX Design",
+      "description": "Intuitive interfaces and exceptional user experiences that convert visitors into clients.",
+      "features": [
+        "User research and analysis",
+        "Interactive wireframes and prototypes",
+        "Visual design and component system",
+        "Usability testing"
+      ],
+      "price": "From €2,500"
+    },
+    "frontend": {
+      "title": "Frontend Development",
+      "description": "Technical implementation of designs with clean, optimized and scalable code.",
+      "features": [
+        "React/Vue.js/Angular development",
+        "Guaranteed responsive design",
+        "Performance optimization",
+        "API and services integration"
+      ],
+      "price": "From €3,500",
+      "popular": "Most Popular"
+    },
+    "consulting": {
+      "title": "UX Consulting",
+      "description": "Complete audit of your digital product with strategic recommendations to improve the experience.",
+      "features": [
+        "Complete UX audit",
+        "Metrics and conversion analysis",
+        "Priority improvements roadmap",
+        "Training sessions for your team"
+      ],
+      "price": "From €1,200"
+    },
+    "startProject": "Start project",
+    "customTitle": "Need something custom?",
+    "customDescription": "Each project is unique. If you have specific needs or want to combine multiple services, let's talk to create a tailored proposal.",
+    "customButton": "Request custom quote"
+  },
+  "contact": {
+    "title": "Ready to create something",
+    "titleHighlight": "amazing",
+    "subtitle": "Let's talk about your next project. I'm here to help you take your ideas to the next level.",
+    "form": {
+      "name": "Full name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "your@email.com",
+      "subjectPlaceholder": "How can I help you?",
+      "messagePlaceholder": "Tell me about your project...",
+      "submit": "Send message",
+      "sending": "Sending..."
+    },
+    "info": {
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "location": "Location",
+      "emailValue": "hello@angel.com",
+      "whatsappValue": "+34 600 000 000",
+      "locationValue": "Madrid, Spain"
+    },
+    "success": "Message sent! Thank you for contacting me. I will respond soon."
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  }
+}
