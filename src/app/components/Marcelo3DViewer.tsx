@@ -5,7 +5,11 @@ import { OrbitControls, useGLTF } from "@react-three/drei";
 import React, { Suspense, useEffect, useRef } from "react";
 import * as THREE from "three";
 
-function MarceloModel(props: any) {
+interface MarceloModelProps {
+  [key: string]: unknown;
+}
+
+function MarceloModel(props: MarceloModelProps) {
   const { scene } = useGLTF("/Marcelo3D.glb");
   const meshRef = useRef<THREE.Group>(null);
 
@@ -50,15 +54,6 @@ function MarceloModel(props: any) {
     </group>
   );
 }
-
-const Fallback3D = () => (
-  <div className="w-60 h-60 bg-gradient-to-br from-primary/30 to-primary/10 rounded-xl flex items-center justify-center">
-    <div className="text-center">
-      <div className="text-4xl mb-2">🎯</div>
-      <div className="text-sm text-white/70">Loading 3D Model...</div>
-    </div>
-  </div>
-);
 
 const Marcelo3DViewer = () => (
   <div className="w-full h-80 sm:h-96 md:h-[28rem] lg:h-[32rem] xl:h-[36rem] mx-auto flex items-center justify-center relative">
