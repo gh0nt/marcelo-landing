@@ -3,6 +3,11 @@ import nodemailer from "nodemailer";
 
 // Función para validar reCAPTCHA
 async function validateRecaptcha(token: string): Promise<boolean> {
+  if (!process.env.RECAPTCHA_SECRET_KEY) {
+    console.log("reCAPTCHA secret key not configured, skipping validation");
+    return true; // Permitir si no está configurado
+  }
+  
   try {
     const response = await fetch(
       "https://www.google.com/recaptcha/api/siteverify",
@@ -36,12 +41,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validar reCAPTCHA
-    if (!recaptchaToken || !(await validateRecaptcha(recaptchaToken))) {
-      return NextResponse.json(
-        { error: "Verificación reCAPTCHA fallida" },
-        { status: 400 }
-      );
+    // Validar reCAPTCHA solo si está configurado
+    const isRecaptchaEnabled = !!process.env.RECAPTCHA_SECRET_KEY;
+    
+    if (isRecaptchaEnabled) {
+      if (!recaptchaToken || !(await validateRecaptcha(recaptchaToken))) {
+        return NextResponse.json(
+          { error: "Verificación reCAPTCHA fallida" },
+          { status: 400 }
+        );
+      }
+    } else {
+      console.log("reCAPTCHA not configured, skipping validation");
     }
 
     // Obtener información adicional del request
@@ -53,8 +64,11 @@ export async function POST(request: NextRequest) {
 
     // Intentar guardar en Supabase si está configurado
     let contactData: { id: string } | null = null;
-    
-    if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+
+    if (
+      process.env.NEXT_PUBLIC_SUPABASE_URL &&
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    ) {
       try {
         const { createClient } = await import("@supabase/supabase-js");
         const supabase = createClient(
@@ -113,9 +127,11 @@ export async function POST(request: NextRequest) {
     };
 
     const projectType = subjectMap[subject] || subject || "No especificado";
-    
+
     // Generar ID único para tracking si no hay Supabase
-    const trackingId = contactData?.id?.slice(-8) || Math.random().toString(36).substr(2, 8).toUpperCase();
+    const trackingId =
+      contactData?.id?.slice(-8) ||
+      Math.random().toString(36).substr(2, 8).toUpperCase();
 
     // Configurar el email
     const mailOptions = {
