@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import { supabase } from "@/lib/supabase";
 
 // Función para validar reCAPTCHA
 async function validateRecaptcha(token: string): Promise<boolean> {
@@ -52,30 +51,46 @@ export async function POST(request: NextRequest) {
       "127.0.0.1";
     const userAgent = request.headers.get("user-agent") || "";
 
-    // Guardar en Supabase
-    const { data: contactData, error: supabaseError } = await supabase
-      .from("contacts")
-      .insert([
-        {
-          name,
-          email,
-          subject: subject || null,
-          project_type: subject || null,
-          message,
-          ip_address: clientIP,
-          user_agent: userAgent,
-          status: "pending",
-        },
-      ])
-      .select()
-      .single();
+    // Intentar guardar en Supabase si está configurado
+    let contactData: { id: string } | null = null;
+    
+    if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      try {
+        const { createClient } = await import("@supabase/supabase-js");
+        const supabase = createClient(
+          process.env.NEXT_PUBLIC_SUPABASE_URL,
+          process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+        );
 
-    if (supabaseError) {
-      console.error("Error saving to Supabase:", supabaseError);
-      return NextResponse.json(
-        { error: "Error al guardar el contacto" },
-        { status: 500 }
-      );
+        const { data, error: supabaseError } = await supabase
+          .from("contacts")
+          .insert([
+            {
+              name,
+              email,
+              subject: subject || null,
+              project_type: subject || null,
+              message,
+              ip_address: clientIP,
+              user_agent: userAgent,
+              status: "pending",
+            },
+          ])
+          .select()
+          .single();
+
+        if (supabaseError) {
+          console.error("Error saving to Supabase:", supabaseError);
+          // No retornamos error aquí, continuamos con el email
+        } else {
+          contactData = data;
+        }
+      } catch (error) {
+        console.error("Error connecting to Supabase:", error);
+        // Continuamos sin base de datos
+      }
+    } else {
+      console.log("Supabase not configured, skipping database save");
     }
 
     // Configurar el transporter de nodemailer
@@ -98,14 +113,15 @@ export async function POST(request: NextRequest) {
     };
 
     const projectType = subjectMap[subject] || subject || "No especificado";
+    
+    // Generar ID único para tracking si no hay Supabase
+    const trackingId = contactData?.id?.slice(-8) || Math.random().toString(36).substr(2, 8).toUpperCase();
 
     // Configurar el email
     const mailOptions = {
       from: process.env.MAIL_FROM,
       to: process.env.MAIL_TO,
-      subject: `Nuevo contacto desde el portfolio - ${projectType} [#${contactData.id.slice(
-        -8
-      )}]`,
+      subject: `Nuevo contacto desde el portfolio - ${projectType} [#${trackingId}]`,
       html: `
         <div style="font-family: 'Arial', sans-serif; max-width: 600px; margin: 0 auto; background-color: #f8f9fa; padding: 20px;">
           <div style="background: linear-gradient(135deg, #0d001a 0%, #1a0d2e 100%); padding: 30px; border-radius: 12px; margin-bottom: 20px;">
@@ -113,7 +129,7 @@ export async function POST(request: NextRequest) {
               📧 Nuevo Mensaje de Contacto
             </h2>
             <p style="color: #fff; text-align: center; margin: 10px 0 0 0; font-size: 14px;">
-              ID: #${contactData.id.slice(-8)}
+              ID: #${trackingId}
             </p>
           </div>
           
@@ -169,7 +185,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         message: "Mensaje enviado correctamente",
-        id: contactData.id,
+        id: contactData?.id || trackingId,
       },
       { status: 200 }
     );

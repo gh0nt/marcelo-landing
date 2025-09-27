@@ -3,9 +3,7 @@ import { Link } from "@/i18n/routing";
 
 const NotFound = () => {
   useEffect(() => {
-    console.error(
-      "404 Error: User attempted to access non-existent route:"
-    );
+    console.error("404 Error: User attempted to access non-existent route:");
   }, []);
 
   return (
