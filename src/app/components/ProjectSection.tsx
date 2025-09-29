@@ -16,7 +16,7 @@ const ProjectsSection = () => {
   const projects = [
     {
       id: 1,
-      title: "AltproExpo Website",
+      title: "AltProExpo Website",
       description:
         "Desarrollo completo de experiencia de usuario para la plataforma AltproExpo con enfoque mobile-first y optimización SEO.",
       image: "/projects/altproexpo.png",
@@ -31,8 +31,7 @@ const ProjectsSection = () => {
       ],
       category: "web",
       featured: true,
-      demoUrl: "#",
-      repoUrl: "#",
+      demoUrl: "https://altproexpo.com/",
     },
     {
       id: 2,
@@ -42,8 +41,7 @@ const ProjectsSection = () => {
       image: "/projects/consuertelogo.png",
       tags: ["WordPress", "Node.js", "MySQL", "NextJS", "PHP"],
       category: "mobile",
-      demoUrl: "#",
-      repoUrl: "#",
+      demoUrl: "https://consuerte.com.co/",
     },
     {
       id: 3,
@@ -53,7 +51,7 @@ const ProjectsSection = () => {
       image: "/projects/front2backlogo.png",
       tags: ["WordPress", "PHP", "Hubspot", "Automations"],
       category: "branding",
-      demoUrl: "#",
+      demoUrl: "https://front2back.co/",
     },
   ];
 
@@ -106,15 +104,21 @@ const ProjectsSection = () => {
               className="animate-fade-up"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <ProjectCard
-                title={project.title}
-                description={project.description}
-                image={project.image}
-                tags={project.tags}
-                demoUrl={project.demoUrl}
-                repoUrl={project.repoUrl}
-                featured={project.featured}
-              />
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <ProjectCard
+                  title={project.title}
+                  description={project.description}
+                  image={project.image}
+                  tags={project.tags}
+                  demoUrl={project.demoUrl}
+                  featured={project.featured}
+                />
+              </a>
             </div>
           ))}
         </div>
