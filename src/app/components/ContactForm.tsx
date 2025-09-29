@@ -34,7 +34,7 @@ const ContactForm = () => {
 
     // Validar reCAPTCHA solo si está configurado
     const isRecaptchaEnabled = !!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-    
+
     if (isRecaptchaEnabled && !recaptchaToken) {
       enqueueSnackbar("Por favor, completa la verificación reCAPTCHA.", {
         variant: "error",
@@ -212,8 +212,12 @@ const ContactForm = () => {
                 ) : (
                   <div className="w-[304px] h-[78px] rounded border border-dashed border-gray-400 bg-gray-100 flex items-center justify-center">
                     <div className="text-center">
-                      <div className="text-sm text-gray-600 mb-1">🔒 Verificación de Seguridad</div>
-                      <div className="text-xs text-gray-500">reCAPTCHA no configurado</div>
+                      <div className="text-sm text-gray-600 mb-1">
+                        🔒 Verificación de Seguridad
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        reCAPTCHA no configurado
+                      </div>
                     </div>
                   </div>
                 )}
@@ -223,8 +227,10 @@ const ContactForm = () => {
             <Button
               type="submit"
               disabled={
-                isSubmitting || 
-                (process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? !recaptchaToken : false)
+                isSubmitting ||
+                (process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+                  ? !recaptchaToken
+                  : false)
               }
               className="w-full btn-primary font-medium py-3 rounded-lg transition-all duration-300 group hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
             >

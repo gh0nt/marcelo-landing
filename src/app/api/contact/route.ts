@@ -7,7 +7,7 @@ async function validateRecaptcha(token: string): Promise<boolean> {
     console.log("reCAPTCHA secret key not configured, skipping validation");
     return true; // Permitir si no está configurado
   }
-  
+
   try {
     const response = await fetch(
       "https://www.google.com/recaptcha/api/siteverify",
@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
 
     // Validar reCAPTCHA solo si está configurado
     const isRecaptchaEnabled = !!process.env.RECAPTCHA_SECRET_KEY;
-    
+
     if (isRecaptchaEnabled) {
       if (!recaptchaToken || !(await validateRecaptcha(recaptchaToken))) {
         return NextResponse.json(

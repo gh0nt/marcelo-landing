@@ -2,6 +2,7 @@
 
 import { Button } from "@/app/components/ui/button";
 import { ArrowRight, ExternalLink } from "lucide-react";
+import Image from "next/image";
 import FloatingDots from "./FloatingDots";
 import Marcelo3DViewer from "./Marcelo3DViewer";
 
@@ -60,18 +61,38 @@ const HeroSection = () => {
             </span>
             <div className="flex space-x-3">
               {[
-                { name: "GitHub", icon: "🔗" },
-                { name: "LinkedIn", icon: "💼" },
-                { name: "Dribbble", icon: "🎨" },
-                { name: "X", icon: "🐦" },
+                {
+                  name: "GitHub",
+                  icon: "/contact/github.svg",
+                  url: "https://github.com/gh0nt",
+                },
+                {
+                  name: "LinkedIn",
+                  icon: "/contact/linkedin.svg",
+                  url: "https://linkedin.com/in/gh0nt",
+                },
+                {
+                  name: "WhatsApp",
+                  icon: "/contact/whatsapp.svg",
+                  url: "https://wa.me/573115315662",
+                },
               ].map((social) => (
-                <button
+                <a
                   key={social.name}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="glass-button w-10 h-10 flex items-center justify-center rounded-lg hover:scale-110 transition-transform"
-                  aria-label={social.name}
+                  aria-label={`Visit ${social.name} profile`}
                 >
-                  <span className="text-sm">{social.icon}</span>
-                </button>
+                  <Image
+                    src={social.icon}
+                    alt={social.name}
+                    width={20}
+                    height={20}
+                    className="w-5 h-5"
+                  />
+                </a>
               ))}
             </div>
           </div>

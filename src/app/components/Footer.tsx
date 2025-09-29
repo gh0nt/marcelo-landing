@@ -32,6 +32,11 @@ const Footer = () => {
           external: true,
         },
         { name: "GitHub", href: "https://github.com/gh0nt", external: true },
+        {
+          name: "WhatsApp",
+          href: "https://wa.me/573115315662",
+          external: true,
+        },
       ],
     },
   ];
