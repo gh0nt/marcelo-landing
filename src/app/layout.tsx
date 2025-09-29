@@ -4,7 +4,7 @@ import "./globals.css";
 import { Providers } from "@/app/providers";
 
 const poppins = Poppins({
-  weight: ['300', '400', '500', '600', '700', '800'],
+  weight: ["300", "400", "500", "600", "700", "800"],
   variable: "--font-poppins",
   subsets: ["latin"],
 });
@@ -18,6 +18,15 @@ export const metadata: Metadata = {
   authors: [{ name: "Marcelo Puentes" }],
   creator: "Marcelo Puentes",
   publisher: "Marcelo Puentes",
+  icons: {
+    icon: [
+      { url: "/marcelologo.svg", sizes: "any", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
+      { url: "/favicon.ico", sizes: "16x16", type: "image/x-icon" },
+    ],
+    shortcut: "/marcelologo.svg",
+    apple: "/marcelologo.svg",
+  },
   openGraph: {
     title: "Marcelo Puentes | Full Stack Developer & Digital Marketing Expert",
     description:
@@ -57,9 +66,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body
-        className={`${poppins.variable} antialiased font-sans`}
-      >
+      <head>
+        <link rel="icon" href="/marcelologo.svg" type="image/svg+xml" />
+        <link rel="shortcut icon" href="/marcelologo.svg" />
+        <link rel="apple-touch-icon" href="/marcelologo.svg" />
+        <link rel="icon" href="/favicon.ico" sizes="32x32" />
+      </head>
+      <body className={`${poppins.variable} antialiased font-sans`}>
         <Providers>{children}</Providers>
       </body>
     </html>
