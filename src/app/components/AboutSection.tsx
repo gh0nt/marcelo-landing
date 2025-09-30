@@ -3,6 +3,9 @@ import { Badge } from "@/app/components/ui/badge";
 const AboutSection = () => {
   const skills = [
     "UI/UX Design",
+    "Marketing Strategy",
+    "SEO & SEM",
+    "HTML & CSS",
     "Figma",
     "NextJS",
     "WordPress",
@@ -35,8 +38,7 @@ const AboutSection = () => {
     {
       period: "2023 - 2024",
       title: "Analista de Datos",
-      company:
-        "Centro de Investigación y Pensamiento para los Llanos Orientales",
+      company: "CIPLLO",
       description:
         "Responsable de implementar validación de datos y corrección en procesos de encuestas, direccionamiento y respuestas utilizando Stata como herramienta primaria.",
     },
@@ -78,10 +80,10 @@ const AboutSection = () => {
 
               <p className="text-foreground-secondary leading-relaxed">
                 Desde que tengo uso de razón, la curiosidad me ha llevado a
-                buscar un conocimiento integral. Empecé en el camino de la
-                ingeniería, que no llegué a terminar; más tarde me adentré en
-                los negocios y su lógica; y finalmente encontré mi verdadera
-                pasión en el desarrollo, retomando aquel interés de niño por las
+                buscar un conocimiento integral. Empecé en el camino de las
+                ciencias básicas; más tarde me adentré en los negocios y su
+                lógica; y finalmente encontré mi verdadera pasión en el
+                desarrollo, retomando aquel interés de niño por las
                 computadoras.
               </p>
 
