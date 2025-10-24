@@ -1,5 +1,7 @@
 "use client";
 
+import NextImage from "next/image";
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -59,9 +61,11 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-secondary rounded-lg flex items-center justify-center">
-                <img
+                <NextImage
                   src="/marcelologo.svg"
                   alt="Marcelo Logo"
+                  width={32}
+                  height={32}
                   className="w-8 h-8"
                 />
               </div>

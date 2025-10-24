@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const ClientsSection = () => {
   // Placeholder client logos - would be replaced with actual client logos
   const clients = [
@@ -32,9 +34,11 @@ const ClientsSection = () => {
             >
               <div className="text-center">
                 <div className="mb-2 group-hover:scale-110 transition-transform flex items-center justify-center">
-                  <img
+                  <Image
                     src={client.logo}
                     alt={`${client.name} logo`}
+                    width={80}
+                    height={32}
                     className="h-8 w-auto max-w-full object-contain opacity-70 group-hover:opacity-100 transition-opacity"
                   />
                 </div>

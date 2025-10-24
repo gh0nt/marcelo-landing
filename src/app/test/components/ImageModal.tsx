@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { X } from "lucide-react";
+import Image from "next/image";
 
 interface ImageModalProps {
   imageUrl: string;
@@ -50,11 +51,14 @@ export default function ImageModal({ imageUrl, onClose }: ImageModalProps) {
         </button>
 
         {/* Image Container */}
-        <div className="bg-[var(--background-secondary)] rounded-2xl overflow-hidden shadow-2xl border border-[var(--glass-border)]">
-          <img
+        <div className="bg-[var(--background-secondary)] rounded-2xl overflow-hidden shadow-2xl border border-[var(--glass-border)] relative">
+          <Image
             src={imageUrl}
             alt="Full size preview"
+            width={1200}
+            height={800}
             className="w-full h-auto max-h-[85vh] object-contain"
+            unoptimized
           />
         </div>
 

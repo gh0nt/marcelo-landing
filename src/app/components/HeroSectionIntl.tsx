@@ -4,6 +4,7 @@ import { Button } from "@/app/components/ui/button";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import heroProfile from "@/app/assets/hero-profile.png";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 const HeroSection = () => {
   const t = useTranslations("hero");
@@ -105,10 +106,13 @@ const HeroSection = () => {
 
             {/* Profile Image */}
             <div className="w-72 h-72 mx-auto bg-gradient-to-br from-primary/20 to-background-secondary rounded-2xl flex items-center justify-center relative overflow-hidden">
-              <img
-                src={heroProfile.src}
+              <Image
+                src={heroProfile}
                 alt={`${t("name")} - ${t("title")}`}
+                width={240}
+                height={240}
                 className="w-60 h-60 object-cover rounded-xl"
+                priority
               />
             </div>
           </div>

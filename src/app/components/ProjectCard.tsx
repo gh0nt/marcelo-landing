@@ -2,6 +2,7 @@
 import { Badge } from "@/app/components/ui/badge";
 import { ExternalLink, Github } from "lucide-react";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 interface ProjectCardProps {
   title: string;
@@ -46,10 +47,11 @@ const ProjectCard = ({
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
                 </div>
               )}
-              <img
+              <Image
                 src={image}
                 alt={title}
-                className={`w-full h-full object-cover transition-all duration-300 group-hover:scale-105 ${
+                fill
+                className={`object-cover transition-all duration-300 group-hover:scale-105 ${
                   imageLoaded ? "opacity-100" : "opacity-0"
                 }`}
                 onLoad={() => {
@@ -60,7 +62,8 @@ const ProjectCard = ({
                   console.error(`Failed to load image: ${image}`, e);
                   setImageError(true);
                 }}
-                loading="lazy"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                unoptimized
               />
             </>
           ) : (

@@ -8,7 +8,8 @@ export default function TestPage() {
       <div className="max-w-6xl w-full">
         <div className="mb-4">
           <h1 className="text-2xl md:text-3xl font-bold text-[var(--foreground)] mb-1">
-            Marcelo's Test for <span className="gradient-text">INCSUB</span>
+            Marcelo&apos;s Test for{" "}
+            <span className="gradient-text">INCSUB</span>
           </h1>
         </div>
         <ChatInterface />

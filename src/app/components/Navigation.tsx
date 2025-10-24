@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Button } from "@/app/components/ui/button";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +29,14 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <img src="/marcelologo.svg" alt="Logo" className="h-8" />
+            <Image
+              src="/marcelologo.svg"
+              alt="Logo"
+              width={32}
+              height={32}
+              className="h-8"
+              priority
+            />
           </div>
 
           {/* Desktop Navigation */}
