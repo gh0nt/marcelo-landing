@@ -53,6 +53,16 @@ const ProjectsSection = () => {
       category: "branding",
       demoUrl: "https://front2back.co/",
     },
+    {
+      id: 4,
+      title: "Ángel Global ADS Landing Page",
+      description:
+        "Landing Page para la plataforma Ángel Global ADS con enfoque en la experiencia del usuario.",
+      image: "/projects/angel-global-ads.png",
+      tags: ["NextJS", "PostgreSQL"],
+      category: "branding",
+      demoUrl: "https://angel-ads-global.com/",
+    },
   ];
 
   const filteredProjects =

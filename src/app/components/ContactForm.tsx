@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app//components/ui/input";
 import { Textarea } from "@/app/components/ui/textarea";
@@ -13,7 +13,6 @@ import {
 } from "@/app/components/ui/select";
 import { Send } from "lucide-react";
 import { useSnackbar } from "notistack";
-import ReCAPTCHA from "react-google-recaptcha";
 import ClientOnly from "@/app/components/ClientOnly";
 
 const ContactForm = () => {
@@ -24,24 +23,11 @@ const ContactForm = () => {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
   const { enqueueSnackbar } = useSnackbar();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    // Validar reCAPTCHA solo si está configurado
-    const isRecaptchaEnabled = !!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-
-    if (isRecaptchaEnabled && !recaptchaToken) {
-      enqueueSnackbar("Por favor, completa la verificación reCAPTCHA.", {
-        variant: "error",
-      });
-      setIsSubmitting(false);
-      return;
-    }
 
     try {
       const response = await fetch("/api/contact", {
@@ -49,10 +35,7 @@ const ContactForm = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          ...formData,
-          recaptchaToken,
-        }),
+        body: JSON.stringify(formData),
       });
 
       const result = await response.json();
@@ -65,8 +48,6 @@ const ContactForm = () => {
           }
         );
         setFormData({ name: "", email: "", subject: "", message: "" });
-        setRecaptchaToken(null);
-        recaptchaRef.current?.reset();
       } else {
         enqueueSnackbar(
           result.error ||
@@ -156,15 +137,7 @@ const ContactForm = () => {
                   <SelectTrigger className="glass-button border-glass-border focus:border-primary">
                     <SelectValue placeholder="Selecciona el tipo de proyecto" />
                   </SelectTrigger>
-                  <SelectContent
-                    className="glass-card border-glass-border"
-                    position="popper"
-                    side="bottom"
-                    align="start"
-                    sideOffset={4}
-                    avoidCollisions={true}
-                    collisionPadding={8}
-                  >
+                  <SelectContent className="glass-card border-glass-border">
                     <SelectItem value="web-design">Diseño UI/UX</SelectItem>
                     <SelectItem value="app-design">
                       Desarrollo Web WordPress o NextJS
@@ -186,52 +159,13 @@ const ContactForm = () => {
                 onChange={(e) => handleChange("message", e.target.value)}
                 className="glass-button border-glass-border focus:border-primary min-h-[120px]"
                 placeholder="Cuéntame sobre tu proyecto..."
-                required
+                required={true}
               />
-            </div>
-
-            {/* reCAPTCHA */}
-            <div className="flex justify-center">
-              <ClientOnly
-                fallback={
-                  <div className="w-[304px] h-[78px] rounded border border-glass-border bg-glass-bg animate-pulse flex items-center justify-center">
-                    <div className="text-sm text-muted-foreground">
-                      Cargando verificación...
-                    </div>
-                  </div>
-                }
-              >
-                {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? (
-                  <ReCAPTCHA
-                    ref={recaptchaRef}
-                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                    onChange={setRecaptchaToken}
-                    onExpired={() => setRecaptchaToken(null)}
-                    theme="dark"
-                  />
-                ) : (
-                  <div className="w-[304px] h-[78px] rounded border border-dashed border-gray-400 bg-gray-100 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="text-sm text-gray-600 mb-1">
-                        🔒 Verificación de Seguridad
-                      </div>
-                      <div className="text-xs text-gray-500">
-                        reCAPTCHA no configurado
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </ClientOnly>
             </div>
 
             <Button
               type="submit"
-              disabled={
-                isSubmitting ||
-                (process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-                  ? !recaptchaToken
-                  : false)
-              }
+              disabled={isSubmitting}
               className="w-full btn-primary font-medium py-3 rounded-lg transition-all duration-300 group hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? (
@@ -254,7 +188,7 @@ const ContactForm = () => {
               <div className="space-y-2">
                 <div className="text-sm font-medium">Email</div>
                 <div className="text-foreground-secondary">
-                  contacto@marcelopuentes.com
+                  giohanpuentes@gmail.com
                 </div>
               </div>
               <div className="space-y-2">

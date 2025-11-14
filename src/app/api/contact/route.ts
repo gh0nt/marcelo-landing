@@ -1,37 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
-// Función para validar reCAPTCHA
-async function validateRecaptcha(token: string): Promise<boolean> {
-  if (!process.env.RECAPTCHA_SECRET_KEY) {
-    console.log("reCAPTCHA secret key not configured, skipping validation");
-    return true; // Permitir si no está configurado
-  }
-
-  try {
-    const response = await fetch(
-      "https://www.google.com/recaptcha/api/siteverify",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
-      }
-    );
-
-    const data = await response.json();
-    return data.success;
-  } catch (error) {
-    console.error("Error validating reCAPTCHA:", error);
-    return false;
-  }
-}
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, email, subject, message, recaptchaToken } =
-      await request.json();
+    const { name, email, subject, message } = await request.json();
 
     // Validación básica
     if (!name || !email || !message) {
@@ -39,20 +13,6 @@ export async function POST(request: NextRequest) {
         { error: "Faltan campos requeridos" },
         { status: 400 }
       );
-    }
-
-    // Validar reCAPTCHA solo si está configurado
-    const isRecaptchaEnabled = !!process.env.RECAPTCHA_SECRET_KEY;
-
-    if (isRecaptchaEnabled) {
-      if (!recaptchaToken || !(await validateRecaptcha(recaptchaToken))) {
-        return NextResponse.json(
-          { error: "Verificación reCAPTCHA fallida" },
-          { status: 400 }
-        );
-      }
-    } else {
-      console.log("reCAPTCHA not configured, skipping validation");
     }
 
     // Obtener información adicional del request
@@ -107,17 +67,6 @@ export async function POST(request: NextRequest) {
       console.log("Supabase not configured, skipping database save");
     }
 
-    // Configurar el transporter de nodemailer
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT || "587"),
-      secure: false, // true para 465, false para otros puertos
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
-
     // Mapear los valores del subject a texto legible
     const subjectMap: Record<string, string> = {
       "web-design": "Diseño UI/UX",
@@ -133,12 +82,13 @@ export async function POST(request: NextRequest) {
       contactData?.id?.slice(-8) ||
       Math.random().toString(36).substr(2, 8).toUpperCase();
 
-    // Configurar el email
-    const mailOptions = {
-      from: process.env.MAIL_FROM,
-      to: process.env.MAIL_TO,
-      subject: `Nuevo contacto desde el portfolio - ${projectType} [#${trackingId}]`,
-      html: `
+    // Enviar email usando Resend
+    try {
+      const { error } = await resend.emails.send({
+        from: process.env.EMAIL_FROM || "onboarding@resend.dev",
+        to: process.env.EMAIL_TO || "giohanpuentes@gmail.com",
+        subject: `Nuevo contacto desde el portfolio - ${projectType} [#${trackingId}]`,
+        html: `
         <div style="font-family: 'Arial', sans-serif; max-width: 600px; margin: 0 auto; background-color: #f8f9fa; padding: 20px;">
           <div style="background: linear-gradient(135deg, #0d001a 0%, #1a0d2e 100%); padding: 30px; border-radius: 12px; margin-bottom: 20px;">
             <h2 style="color: #eeba2b; margin: 0; font-size: 24px; text-align: center;">
@@ -180,22 +130,22 @@ export async function POST(request: NextRequest) {
                   day: "numeric",
                   hour: "2-digit",
                   minute: "2-digit",
-                })} | ✅ Verificado con reCAPTCHA
+                })}
               </p>
             </div>
           </div>
         </div>
       `,
-    };
+      });
 
-    // Intentar enviar el email
-    try {
-      await transporter.sendMail(mailOptions);
-      console.log("Email sent successfully to:", process.env.MAIL_TO);
+      if (error) {
+        console.error("Error sending email with Resend:", error);
+      } else {
+        console.log("Email sent successfully to:", process.env.EMAIL_TO);
+      }
     } catch (emailError) {
-      console.error("Error enviando email:", emailError);
+      console.error("Error sending email:", emailError);
       // No devolvemos error aquí porque el contacto ya se guardó en la DB
-      // El usuario puede ser notificado del éxito aunque el email falle
     }
 
     return NextResponse.json(
