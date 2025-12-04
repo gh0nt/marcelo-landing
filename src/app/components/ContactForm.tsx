@@ -27,44 +27,40 @@ const ContactForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (isSubmitting) return; // prevent double submissions
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/contact", {
+      const res = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
+      const result = await res.json().catch(() => ({ error: "Invalid response from server" }));
 
-      if (response.ok) {
-        enqueueSnackbar(
-          "¡Mensaje enviado! Gracias por contactarme. Te responderé pronto.",
-          {
-            variant: "success",
-          }
-        );
+      if (res.ok && result?.success && result.redirectUrl) {
+        enqueueSnackbar("Redirigiendo a WhatsApp...", { variant: "success" });
+        // Open WhatsApp in a new tab/window
+        try {
+          window.open(result.redirectUrl, "_blank");
+        } catch (err) {
+          console.error("Failed to open WhatsApp URL:", err);
+        }
+
         setFormData({ name: "", email: "", subject: "", message: "" });
+      } else if (res.status === 429) {
+        enqueueSnackbar(result.error || "Too many submissions. Please wait a moment.", { variant: "error" });
+      } else if (res.status === 400) {
+        const msg = result?.error?.message || result?.error || "Validation error. Please check your input.";
+        enqueueSnackbar(msg, { variant: "error" });
       } else {
-        enqueueSnackbar(
-          result.error ||
-            "Error al enviar el mensaje. Por favor, intenta de nuevo.",
-          {
-            variant: "error",
-          }
-        );
+        enqueueSnackbar(result.error || "Error al enviar el mensaje. Por favor, intenta de nuevo.", { variant: "error" });
       }
     } catch (error) {
-      console.error("Error:", error);
-      enqueueSnackbar(
-        "Error de conexión. Por favor, verifica tu conexión a internet e intenta de nuevo.",
-        {
-          variant: "error",
-        }
-      );
+      console.error("Error submitting contact form:", error);
+      enqueueSnackbar("Error de conexión. Por favor, verifica tu conexión a internet e intenta de nuevo.", { variant: "error" });
     } finally {
       setIsSubmitting(false);
     }
