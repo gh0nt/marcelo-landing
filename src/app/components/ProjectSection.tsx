@@ -63,6 +63,16 @@ const ProjectsSection = () => {
       category: "branding",
       demoUrl: "https://angel-ads-global.com/",
     },
+    {
+      id: 5,
+      title: "Finalap - Running App",
+      description:
+        "App para corredores que permite registrar y monitorear sus resultados en maratones.",
+      image: "/projects/finalap.png",
+      tags: ["NextJS", "PostgreSQL", "Microservicios", "Pasarela de Pago"],
+      category: "app",
+      demoUrl: "https://finalap.com/",
+    },
   ];
 
   const filteredProjects =

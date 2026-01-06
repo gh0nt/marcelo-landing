@@ -79,7 +79,7 @@ const Footer = () => {
             {/* Contact Info */}
             <div className="space-y-2 text-sm">
               <div className="flex items-center gap-2 text-foreground-muted">
-                <span>contacto@marcelopuentes.com</span>
+                <span>giohanpuentes@gmail.com</span>
               </div>
               <div className="flex items-center gap-2 text-foreground-muted">
                 <span>Bogotá, Colombia</span>

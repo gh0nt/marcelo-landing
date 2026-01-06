@@ -90,5 +90,16 @@
   },
   "footer": {
     "rights": "All rights reserved."
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "Oops! It seems you've ventured into uncharted territory. The page you're looking for doesn't exist or has been moved.",
+    "suggestions": "Here's what you can do:",
+    "suggestion1": "Check if the URL is correct",
+    "suggestion2": "Return to the home page",
+    "suggestion3": "Use the navigation menu to find what you need",
+    "goHome": "Go Home",
+    "goBack": "Go Back",
+    "funMessage": "Lost in space? We'll help you find your way back! 🚀"
   }
 }

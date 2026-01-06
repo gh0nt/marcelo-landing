@@ -17,6 +17,10 @@ module.exports = {
         "foreground-muted": "var(--foreground-muted)",
         "glass-border": "var(--glass-border)",
         "card-bg": "var(--card-bg)",
+        "dots-green": "var(--dots-green)",
+        "dots-blue": "var(--dots-blue)",
+        "dots-pink": "var(--dots-pink)",
+        "dots-purple": "var(--dots-purple)",
       },
       fontFamily: {
         sans: ["var(--font-poppins)", "Arial", "Helvetica", "sans-serif"],

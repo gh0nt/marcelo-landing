@@ -3,10 +3,26 @@
 import { Button } from "@/app/components/ui/button";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 import FloatingDots from "./FloatingDots";
 import Marcelo3DViewer from "./Marcelo3DViewer";
 
 const HeroSection = () => {
+  const [showOverlay, setShowOverlay] = useState(true);
+
+  useEffect(() => {
+    // Auto-hide overlay after 5 seconds
+    const timer = setTimeout(() => {
+      setShowOverlay(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleOverlayClick = () => {
+    setShowOverlay(false);
+  };
+
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -25,8 +41,8 @@ const HeroSection = () => {
         {/* Text Content */}
         <div className="space-y-6 animate-fade-up">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-            Marketing y Desarrollo <br></br>
-            <span className="gradient-text">Que convierten</span>
+            Growth Engineer <br></br>
+            <span className="gradient-text">Fullstack Developer</span>
           </h1>
 
           <p className="text-foreground-secondary text-lg md:text-xl leading-relaxed max-w-lg">
@@ -101,6 +117,22 @@ const HeroSection = () => {
         {/* Profile 3D Model with Glass Frame */}
         <div className="relative animate-scale-in">
           <div className="glass-card p-8 rounded-3xl relative overflow-hidden">
+            {/* Interactive Overlay */}
+            {showOverlay && (
+              <div
+                onClick={handleOverlayClick}
+                className="absolute inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md cursor-pointer transition-all duration-500 animate-fade-in"
+              >
+                <div className="text-center space-y-4 animate-pulse">
+                  <div className="text-2xl">👆</div>
+                  <p className="text-white text-lg font-semibold px-4">
+                    Toca para interactuar con el modelo 3D
+                  </p>
+                  <p className="text-white/70 text-sm">Toca para cerrar</p>
+                </div>
+              </div>
+            )}
+
             {/* Floating UI Elements */}
             <div className="absolute -top-2 -right-2 glass-button px-3 py-1 rounded-full text-xs font-medium animate-float">
               Hola, soy Marcelo 👋

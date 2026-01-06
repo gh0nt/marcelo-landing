@@ -1,19 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
 import { Link } from "@/i18n/routing";
 import { Button } from "@/app/components/ui/button";
 import { Home, ArrowLeft, Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 import FloatingDots from "@/app/components/FloatingDots";
 
-const NotFound = () => {
-  const t = useTranslations("notFound");
-
-  useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route");
-  }, []);
-
+export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
       <FloatingDots />
@@ -30,10 +23,10 @@ const NotFound = () => {
         {/* Message */}
         <div className="space-y-4">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-            {t("title")}
+            {useTranslations("notFound")("title")}
           </h2>
           <p className="text-lg md:text-xl text-foreground-secondary max-w-md mx-auto leading-relaxed">
-            {t("description")}
+            {useTranslations("notFound")("description")}
           </p>
         </div>
 
@@ -41,12 +34,20 @@ const NotFound = () => {
         <div className="glass-card p-6 md:p-8 max-w-md mx-auto space-y-4">
           <div className="flex items-center gap-3 text-foreground-secondary">
             <Search className="w-5 h-5 text-primary-orange" />
-            <p className="text-sm text-left">{t("suggestions")}</p>
+            <p className="text-sm text-left">
+              {useTranslations("notFound")("suggestions")}
+            </p>
           </div>
           <ul className="text-sm text-left space-y-2 text-foreground-secondary pl-8">
-            <li className="list-disc">{t("suggestion1")}</li>
-            <li className="list-disc">{t("suggestion2")}</li>
-            <li className="list-disc">{t("suggestion3")}</li>
+            <li className="list-disc">
+              {useTranslations("notFound")("suggestion1")}
+            </li>
+            <li className="list-disc">
+              {useTranslations("notFound")("suggestion2")}
+            </li>
+            <li className="list-disc">
+              {useTranslations("notFound")("suggestion3")}
+            </li>
           </ul>
         </div>
 
@@ -55,7 +56,7 @@ const NotFound = () => {
           <Link href="/">
             <Button className="btn-primary font-medium px-8 py-3 rounded-lg transition-all duration-300 group hover:scale-105 w-full sm:w-auto">
               <Home className="mr-2 w-4 h-4" />
-              {t("goHome")}
+              {useTranslations("notFound")("goHome")}
             </Button>
           </Link>
 
@@ -65,17 +66,15 @@ const NotFound = () => {
             className="glass-card border-2 border-white/20 text-white hover:bg-white/10 hover:border-white/30 px-8 py-3 font-medium rounded-lg transition-all duration-300 group hover:scale-105 w-full sm:w-auto"
           >
             <ArrowLeft className="mr-2 w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            {t("goBack")}
+            {useTranslations("notFound")("goBack")}
           </Button>
         </div>
 
         {/* Fun message */}
         <p className="text-sm text-foreground-muted pt-8 animate-fade-in">
-          {t("funMessage")}
+          {useTranslations("notFound")("funMessage")}
         </p>
       </div>
     </div>
   );
-};
-
-export default NotFound;
+}

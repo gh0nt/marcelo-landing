@@ -90,5 +90,16 @@
   },
   "footer": {
     "rights": "Todos los derechos reservados."
+  },
+  "notFound": {
+    "title": "Página No Encontrada",
+    "description": "¡Ups! Parece que te has aventurado en territorio desconocido. La página que buscas no existe o ha sido movida.",
+    "suggestions": "Aquí está lo que puedes hacer:",
+    "suggestion1": "Verifica que la URL sea correcta",
+    "suggestion2": "Regresa a la página de inicio",
+    "suggestion3": "Usa el menú de navegación para encontrar lo que necesitas",
+    "goHome": "Ir al Inicio",
+    "goBack": "Volver Atrás",
+    "funMessage": "¿Perdido en el espacio? ¡Te ayudaremos a encontrar el camino de vuelta! 🚀"
   }
 }
