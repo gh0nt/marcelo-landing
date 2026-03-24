@@ -124,7 +124,7 @@ const HeroSection = () => {
                 className="absolute inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md cursor-pointer transition-all duration-500 animate-fade-in"
               >
                 <div className="text-center space-y-4 animate-pulse">
-                  <div className="text-2xl">👆</div>
+           
                   <p className="text-white text-lg font-semibold px-4">
                     Toca para interactuar con el modelo 3D
                   </p>

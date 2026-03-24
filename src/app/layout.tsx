@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { Providers } from "@/app/providers";
 
@@ -71,6 +72,19 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/marcelologo.svg" />
         <link rel="apple-touch-icon" href="/marcelologo.svg" />
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17918845093"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'AW-17918845093');
+          `}
+        </Script>
       </head>
       <body className={`${poppins.variable} antialiased font-sans`}>
         <Providers>{children}</Providers>
