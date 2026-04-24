@@ -80,6 +80,12 @@ const PROJECTS = [
     href: "https://tiked.co/",
   },
   {
+    title: "Finanzas Sin Ruido",
+    role: "Case Study",
+    summary: "Finance portal for data comparison and analysis.",
+    href: "https://finanzassinruido.com/",
+  },
+  {
     title: "Angel Ads",
     role: "Case Study",
     summary: "High-conversion funnel built for paid traffic performance.",
