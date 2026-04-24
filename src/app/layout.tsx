@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { Providers } from "@/app/providers";
+import { getLocale } from "next-intl/server";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700", "800"],
@@ -21,12 +22,11 @@ export const metadata: Metadata = {
   publisher: "Marcelo Puentes",
   icons: {
     icon: [
-      { url: "/marcelologo.svg", sizes: "any", type: "image/svg+xml" },
       { url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
       { url: "/favicon.ico", sizes: "16x16", type: "image/x-icon" },
     ],
-    shortcut: "/marcelologo.svg",
-    apple: "/marcelologo.svg",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
   openGraph: {
     title: "Marcelo Puentes | Full Stack Developer & Digital Marketing Expert",
@@ -60,13 +60,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+
   return (
-    <html lang="es">
+    <html lang={locale}>
       <head>
         <link rel="icon" href="/marcelologo.svg" type="image/svg+xml" />
         <link rel="shortcut icon" href="/marcelologo.svg" />

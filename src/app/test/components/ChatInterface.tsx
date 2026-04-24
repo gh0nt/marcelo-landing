@@ -250,7 +250,7 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
 
   return (
     <div className="relative group mt-1.5">
-      <div className="absolute -top-6 left-0 right-0 flex items-center justify-between px-3 py-1.5 bg-[var(--background-secondary)] rounded-t-lg border border-[var(--glass-border)] border-b-0">
+      <div className="absolute -top-6 left-0 right-0 flex items-center justify-between px-3 py-1.5 bg-[var(--background-secondary)] rounded-t-lg border border-[var(--glass-border)]">
         <span className="text-[10px] font-mono text-[var(--primary-orange)] uppercase tracking-wider">
           {language}
         </span>
@@ -383,7 +383,7 @@ export default function ChatInterface() {
         </div>
 
         {/* Input Area */}
-        <div className="border-t border-[var(--glass-border)] p-3 bg-[var(--card-bg)]">
+        <div className="  border-[var(--glass-border)] p-3 bg-[var(--card-bg)]">
           <form onSubmit={handleSendMessage} className="flex gap-2">
             <input
               type="text"

@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --background: #0d001a;
-  --foreground: #f4f4f4;
-  --primary-orange: #eeba2b;
-  --primary-orange-hover: #e6d000;
-  --background-secondary: #1a0d2e;
-  --foreground-secondary: #b8b8b8;
-  --foreground-muted: #888888;
+  --background: #d7ba7b;
+  --foreground: #1f2a2b;
+  --primary-orange: #d8bd84;
+  --primary-orange-hover: #e6cf9a;
+  --background-secondary: #1f2a2b;
+  --foreground-secondary: #3c4a4d;
+  --foreground-muted: #6a787b;
   --glass-bg: rgba(255, 255, 255, 0.05);
   --glass-border: rgba(255, 255, 255, 0.1);
   --card-bg: rgba(255, 255, 255, 0.03);

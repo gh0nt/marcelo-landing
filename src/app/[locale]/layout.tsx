@@ -1,28 +1,68 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "../globals.css";
-import { Providers } from "@/app/providers";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
-import Script from "next/script";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export async function generateMetadata(): Promise<Metadata> {
-  // You can customize this logic based on locale or other params
   return {
-    title: "Marcelo Puentes | MKT & DEV",
-    description: "Marketer and Developer for your business growth",
+    title:
+      "Marcelo Puentes | Growth Marketer, Developer, and Marketing Engineer",
+    description:
+      "Marcelo Puentes is a growth-focused marketer, developer, and marketing engineer building websites, funnels, and digital systems that turn traffic into measurable business growth.",
+    keywords: [
+      "Marcelo Puentes",
+      "growth marketer",
+      "marketer",
+      "developer",
+      "marketing engineer",
+      "growth marketing",
+      "web developer",
+      "full stack developer",
+      "digital marketer",
+      "conversion optimization",
+      "marketing systems",
+      "lead generation",
+      "business growth",
+      "website development",
+      "marketing automation",
+    ],
+    authors: [{ name: "Marcelo Puentes" }],
+    creator: "Marcelo Puentes",
+    publisher: "Marcelo Puentes",
+    metadataBase: new URL("https://marcelopuentes.com"),
+    alternates: {
+      canonical: "/",
+    },
+    openGraph: {
+      title:
+        "Marcelo Puentes | Growth Marketer, Developer, and Marketing Engineer",
+      description:
+        "Growth-focused marketing and development for brands that need better websites, smarter funnels, and measurable results.",
+      url: "https://marcelopuentes.com",
+      siteName: "Marcelo Puentes",
+      locale: "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title:
+        "Marcelo Puentes | Growth Marketer, Developer, and Marketing Engineer",
+      description:
+        "Web development, growth marketing, and marketing engineering focused on conversion, lead generation, and scalable systems.",
+      creator: "@marcelopuentes",
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
   };
 }
 
@@ -43,29 +83,8 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
-      <head>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-17918845093"
-          strategy="afterInteractive"
-        />
-        <Script id="gtag-init" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'AW-17918845093');
-          `}
-        </Script>
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <NextIntlClientProvider messages={messages}>
-          <Providers>{children}</Providers>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      {children}
+    </NextIntlClientProvider>
   );
 }

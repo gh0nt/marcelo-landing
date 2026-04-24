@@ -1,24 +1,73 @@
-const FloatingDots = () => {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Green Dot */}
-      <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-dots-green rounded-full animate-float opacity-80"></div>
+"use client";
 
-      {/* Blue Dot */}
-      <div className="absolute top-1/3 right-1/4 w-4 h-4 bg-dots-blue rounded-full animate-float-delayed opacity-70"></div>
+import React from "react";
+import { cn } from "@/app/lib/utils";
 
-      {/* Pink Dot */}
-      <div className="absolute bottom-1/3 right-1/3 w-2 h-2 bg-dots-pink rounded-full animate-float-slow opacity-90"></div>
-
-      {/* Purple Dot */}
-      <div className="absolute bottom-2/5 left-1/5 w-3 h-3 bg-dots-purple rounded-full animate-float opacity-75"></div>
-
-      {/* Additional floating dots for more dynamic feel */}
-      <div className="absolute top-3/5 left-1/8 w-2 h-2 bg-dots-blue rounded-full animate-float-delayed opacity-60"></div>
-      <div className="absolute bottom-1/5 right-1/8 w-2 h-2 bg-dots-green rounded-full animate-float-slow opacity-50"></div>
-      <div className="absolute top-1/8 right-1/3 w-1 h-1 bg-dots-pink rounded-full animate-float opacity-80"></div>
-    </div>
-  );
+type FloatingDotsProps = {
+  className?: string;
 };
 
-export default FloatingDots;
+const DOTS: Array<{ className: string }> = [
+  {
+    className:
+      "top-[12%] left-[10%] h-3 w-3 bg-dots-green opacity-70 animate-float",
+  },
+  {
+    className:
+      "top-[18%] left-[70%] h-2.5 w-2.5 bg-dots-blue opacity-70 animate-float-delayed",
+  },
+  {
+    className:
+      "top-[30%] left-[85%] h-4 w-4 bg-dots-purple opacity-60 animate-float-slow",
+  },
+  {
+    className:
+      "top-[42%] left-[15%] h-2 w-2 bg-dots-pink opacity-70 animate-float-delayed",
+  },
+  {
+    className:
+      "top-[55%] left-[55%] h-3.5 w-3.5 bg-primary-orange opacity-30 animate-float",
+  },
+  {
+    className:
+      "top-[62%] left-[25%] h-5 w-5 bg-dots-blue opacity-50 animate-float-slow",
+  },
+  {
+    className:
+      "top-[70%] left-[80%] h-3 w-3 bg-dots-green opacity-60 animate-float",
+  },
+  {
+    className:
+      "top-[78%] left-[40%] h-2.5 w-2.5 bg-dots-purple opacity-60 animate-float-delayed",
+  },
+  {
+    className:
+      "top-[85%] left-[12%] h-4 w-4 bg-dots-pink opacity-55 animate-float-slow",
+  },
+  {
+    className:
+      "top-[88%] left-[68%] h-2 w-2 bg-primary-orange opacity-35 animate-float",
+  },
+];
+
+export default function FloatingDots({ className }: FloatingDotsProps) {
+  return (
+    <div
+      aria-hidden="true"
+      className={cn(
+        "absolute inset-0 overflow-hidden pointer-events-none",
+        className,
+      )}
+    >
+      {DOTS.map((dot) => (
+        <span
+          key={dot.className}
+          className={cn(
+            "absolute rounded-full blur-[0.5px] shadow-none",
+            dot.className,
+          )}
+        />
+      ))}
+    </div>
+  );
+}
