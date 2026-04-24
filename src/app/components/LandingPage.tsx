@@ -108,7 +108,7 @@ const PROJECTS = [
     role: "Project",
     summary:
       "Web platform designed to convert finance web visitors into qualified leads.",
-    href: "https://consuerte.com.co/",
+    href: "https://front2back.co/",
   },
 ];
 
