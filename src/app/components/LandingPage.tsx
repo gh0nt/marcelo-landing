@@ -73,12 +73,7 @@ const EXPERIENCE_ITEMS = [
 ];
 
 const PROJECTS = [
-  {
-    title: "Tiked.co",
-    role: "Case Study",
-    summary: "Ticket application for managing event registrations.",
-    href: "https://tiked.co/",
-  },
+
   {
     title: "Finanzas Sin Ruido",
     role: "Case Study",
